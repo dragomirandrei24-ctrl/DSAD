@@ -6,8 +6,6 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import StandardScaler
 from sklearn.decomposition import PCA
 
-os.makedirs("data_out", exist_ok=True)
-
 fisier_local = "Wholesale customers data.csv"
 url_uci = "https://archive.ics.uci.edu/ml/machine-learning-databases/00292/Wholesale%20customers%20data.csv"
 
@@ -30,10 +28,10 @@ X = df[spending_cols].copy()
 scaler = StandardScaler()
 X_std = scaler.fit_transform(X)
 df_std = pd.DataFrame(X_std, columns=spending_cols, index=df.index)
-df_std.to_csv("data_out/wholesale_standardizat.csv", index=False)
+df_std.to_csv("wholesale_standardizat.csv", index=False)
 
 R = df_std.corr()
-R.to_csv("data_out/R_wholesale.csv", index=True)
+R.to_csv("R_wholesale.csv", index=True)
 
 plt.figure(figsize=(8, 6))
 sns.heatmap(
@@ -47,7 +45,7 @@ sns.heatmap(
 )
 plt.title("Correlation Matrix - Customer Spending Categories")
 plt.tight_layout()
-plt.savefig("data_out/corelogram_heatmap.png")
+plt.savefig("corelogram_heatmap.png")
 plt.show()
 
 pca = PCA()
@@ -66,7 +64,7 @@ pca_summary = pd.DataFrame({
 })
 
 print(pca_summary.to_string(index=False))
-pca_summary.to_csv("data_out/pca_varianta_explicata.csv", index=False)
+pca_summary.to_csv("pca_varianta_explicata.csv", index=False)
 
 num_components_80 = int(np.argmax(cumulative_variance_ratio >= 0.80) + 1)
 print(f"\nNumarul de componente necesare pentru >= 80% din varianta: {num_components_80}")
@@ -77,4 +75,4 @@ loadings = pd.DataFrame(
     index=spending_cols,
     columns=[f"PC{i+1}" for i in range(len(spending_cols))]
 )
-loadings.to_csv("data_out/pca_loadings.csv", index=True)
+loadings.to_csv("pca_loadings.csv", index=True)

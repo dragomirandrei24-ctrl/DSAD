@@ -10,7 +10,7 @@ from geopandas import GeoDataFrame
 pd.set_option("display.max_columns",None)
 np.set_printoptions(3,sys.maxsize,suppress=True)
 
-set_date = pd.read_csv("data_in/ADN/Y_DNA_Tari.csv",index_col=0)
+set_date = pd.read_csv("Y_DNA_Tari.csv",index_col=0)
 nume_variabile = "Markeri genetici"
 
 nan_replace_df(set_date)
@@ -20,12 +20,12 @@ x = set_date[variabile_observate].values
 # print(x)
 
 x_,r_v,alpha,a = acp(x)
-t_r = salvare_ndarray(r_v, variabile_observate, variabile_observate, nume_variabile, "data_out/R.csv")
+t_r = salvare_ndarray(r_v, variabile_observate, variabile_observate, nume_variabile, "R.csv")
 corelograma(t_r)
 
 # Analiza variabilitatii
 t_varianta = tabelare_varianta(alpha)
-t_varianta.round(3).to_csv("data_out/Varianta.csv")
+t_varianta.round(3).to_csv("Varianta.csv")
 
 k = plot_varianta(alpha)
 nr_min_comp = min([v for v in k if v is not None])
@@ -39,14 +39,14 @@ t_c = salvare_ndarray(
     set_date.index,
     etichete_componente,
     set_date.index.name,
-    "data_out/C.csv"
+    "C.csv"
 )
 t_s = salvare_ndarray(
     s,
     set_date.index,
     etichete_componente,
     set_date.index.name,
-    "data_out/S.csv"
+    "S.csv"
 )
 n,m = x.shape
 r_xc = np.corrcoef(x,c,rowvar=False)[:m,m:]
@@ -55,7 +55,7 @@ t_r_xc = salvare_ndarray(
     variabile_observate,
     etichete_componente,
     nume_variabile,
-    "data_out/R_xc.csv"
+    "R_xc.csv"
 )
 corelograma(t_r_xc,"Corelatii factoriale")
 # Cercul corelatiilor
@@ -80,7 +80,7 @@ t_cosin=salvare_ndarray(
     set_date.index,
     etichete_componente,
     set_date.index.name,
-    "data_out/Cosin.csv"
+    "Cosin.csv"
 )
 if n<50:
     corelograma(
@@ -98,7 +98,7 @@ t_contrib = salvare_ndarray(
     set_date.index,
     etichete_componente,
     set_date.index.name,
-    "data_out/Contrib.csv"
+    "Contrib.csv"
 )
 corelograma(
     t_contrib,
@@ -113,7 +113,7 @@ t_comm = salvare_ndarray(
     variabile_observate,
     etichete_componente,
     "Markeri",
-    "data_out/Comm.csv"
+    "Comm.csv"
 )
 corelograma(
     t_comm,
@@ -124,7 +124,7 @@ corelograma(
 )
 
 # Trasare harta scoruri
-gdf = GeoDataFrame.from_file("Europa/Europa.shp")
+gdf = GeoDataFrame.from_file("Europa.shp")
 print(gdf)
 
 # show()
