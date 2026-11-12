@@ -1,0 +1,56 @@
+Understanding Customer Purchasing Behavior
+
+https://archive.ics.uci.edu/dataset/292/wholesale+customers?utm_source=chatgpt.com
+
+The dataset contains 440 customers of a wholesale distributor, with annual spending across six product categories, plus sales channel and region.
+
+
+UCI Machine Learning Repository+1
+Variable
+
+Description
+
+Fresh
+
+Spending on fresh products
+
+Milk
+
+Spending on milk products
+
+Grocery
+
+Spending on groceries
+
+Frozen
+
+Spending on frozen products
+
+Detergents_Paper
+
+Spending on cleaning products
+
+Delicassen
+
+Spending on delicatessen products
+
+Channel
+
+HoReCa or Retail
+
+Region
+
+Geographic region
+
+
+
+Business scenario: You are a data analyst working for a wholesale distributor. Management wants to understand the main purchasing patterns among its customers. Instead of analyzing six spending variables individually, you will use PCA to identify the principal dimensions of purchasing behavior.
+
+Load the dataset and select the six spending variables.
+
+Standardize the variables
+
+Create the corellation matrix using seaborn
+Apply PCA and calculate the explained variance ratio for each component.
+
+Determine how many components are necessary to explain at least 80% of the total variance.
